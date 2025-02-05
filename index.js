@@ -26,7 +26,7 @@ app.use('/api', customerRoutes);
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/oongole")
+  .connect("mongodb+srv://shitijsharma707:a16qWREKlTYbvLYl@cluster0.qwcrf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/test")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB connection error: ", err));
 
