@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());  // Middleware for JSON parsing
 app.use(cors());          // Enable CORS
 app.use((req, res, next) => {
-res.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self' http://localhost:5000; connect-src 'self'; script-src 'self'; style-src 'self';");
+res.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self' https://oongle.onrender.com; connect-src 'self'; script-src 'self'; style-src 'self';");
 next();
 });
 
