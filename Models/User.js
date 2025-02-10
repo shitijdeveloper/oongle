@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -22,7 +21,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  Is_active: {
+    type: Boolean,
+    default: false,
+  },
+  Is_approved: {
+    type: Boolean,
+    default: false,
+  }
+
 });
 
-const User= mongoose.model("User", userSchema);
-module.exports=User
+const User = mongoose.model("User", userSchema);
+module.exports = User
