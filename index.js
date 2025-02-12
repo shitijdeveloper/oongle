@@ -5,6 +5,7 @@ const path = require('path');
 const authRoutes = require("./Routers/UserRouters");
 const productRoutes = require('./Routers/ProductRouter');
 const customerRoutes = require('./Routers/CustomerRouter');
+const Razorpay = require('razorpay');
 
 const app = express();
 
