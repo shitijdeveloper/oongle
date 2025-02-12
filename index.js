@@ -31,6 +31,40 @@ mongoose
   .catch((err) => console.log("MongoDB connection error: ", err));
 
 const PORT = process.env.PORT || 5000;
+app.post("/api/orders", async (req, res) => {
+  try {
+    // Initialize Razorpay instance with key_id and key_secret
+    const razorpay = new Razorpay({
+      key_id: "rzp_test_OidPmW3w9xT9bX",  // Replace with your Razorpay Key ID
+      key_secret: "JV2MnFDEiFcTmn92p4vk7rOt"  // Replace with your Razorpay Key Secret
+    });
+
+    // Capture the amount from the request body
+    const { amount } = req.body;  // Ensure amount is passed in the request body
+
+    // Define the payment order options
+    const options = {
+      amount: amount * 100, // Convert amount to paise (Razorpay takes amount in paise)
+      currency: 'INR', // Currency type (INR for Indian Rupees)
+      receipt: `order_rcptid_${Math.floor(Math.random() * 1000)}`, // Optional, a unique receipt ID
+      payment_capture: 1  // Automatically capture payment
+    };
+
+    // Create the order using Razorpay API
+    const order = await razorpay.orders.create(options);
+
+    // Send back the order details to the client
+    res.status(200).json({
+      id: order.id,
+      amount: order.amount,
+      currency: order.currency
+    });
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).json({ message: "Error creating Razorpay order", error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
